@@ -4,15 +4,6 @@
 
 ---
 
-## 📌 Pipeline Overview  
-
-The system is structured following the pipeline shown below.  
-It integrates data collection, processing, management via a feature store, and prediction based on ML models.  
-
-![Pipeline Diagram](images/pipeline.png)  
-*Figure: Data flow and system architecture.*
-
----
 
 ## ✨ Key Features  
 
