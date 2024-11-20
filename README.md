@@ -1,50 +1,125 @@
-# Air Quality Prediction with Rolling Window Features
+Here’s the updated **README.md** that includes the performance and plots for both versions of the model:
 
-This repository implements air quality prediction using rolling window features to enhance the model's accuracy and prediction capabilities. Below are the key steps and features of the implementation:
+---
 
-## Rolling Window Feature Update
+# AIR QUALITY PREDICTOR 🌍💨  
+
+**Air Quality Predictor** is an advanced machine learning system designed to forecast air quality levels at *Serso via dei Caduti*, leveraging a feature store for integrated batch and real-time data pipelines. Inspired by O'Reilly's *Building Machine Learning Systems with a Feature Store: Batch, Real-Time, and LLMs*, this project demonstrates the power of scalable and interactive ML systems.
+
+---
+
+## 📌 Pipeline Overview  
+
+The system is structured following the pipeline shown below.  
+It integrates data collection, processing, management via a feature store, and prediction based on ML models.  
+
+![Pipeline Diagram](images/pipeline.png)  
+*Figure: Data flow and system architecture.*
+
+---
+
+## ✨ Key Features  
+
+1. **Batch and Real-Time Processing:**  
+   - Supports both **real-time** and **batch** predictions for flexible operations.  
+
+2. **Advanced Feature Store:**  
+   - Efficiently manages features for training and predictions.  
+
+3. **Support for LLMs:**  
+   - Implements advanced techniques like **Fine-Tuning** and **Retrieval-Augmented Generation (RAG)**.  
+
+4. **Rolling Window Features:**  
+   - Enhances predictive accuracy with a 3-day rolling mean of PM2.5 as an additional feature.  
+
+5. **Interactive Predictions:**  
+   - Live dashboard and tools for real-time data monitoring and prediction requests.  
+
+---
+
+## 🚀 Getting Started  
+
+### 1. View Predictions  
+
+#### With Rolling Window Features  
+Access predictions that utilize rolling window features on the [Interactive Dashboard](https://jacopodallafior.github.io/Air_Quality_Rolling_Window/air-quality/).  
+
+#### Without Rolling Window Features  
+Explore predictions without rolling window features on this [Interactive Dashboard](https://jacopodallafior.github.io/Air_quality/air-quality/).  
+
+### 2. Request a Prediction  
+Submit a new prediction request using the [Gradio Live Tool](https://e8055f13e89e464989.gradio.live/).  
+
+---
+
+## Rolling Window Prediction Details  
+
+This version implements air quality prediction using rolling window features to enhance the model's accuracy and prediction capabilities.  
+
+### Rolling Window Feature Update  
 
 1. **Rolling Window Calculation**  
-   The dataset used for training has been updated by introducing a new feature: a 3-day rolling mean of the PM2.5 values. This was calculated using the following command:  
+   The dataset includes a new feature: a 3-day rolling mean of the PM2.5 values, calculated as follows:  
    ```python
    df_roll['pm25_3day_roll_mean'] = df_roll['pm25'].rolling(window=3).mean()
-# Air Quality Prediction: Rolling Window Features
+   ```
 
-This project incorporates rolling window features into the air quality prediction pipeline to enhance the model's predictive accuracy and data utility.
+2. **Daily Feature Updates**  
+   A notebook (**2_air_quality_feature_pipeline.ipynb**) recalculates the rolling window mean daily using real-time PM2.5 data.  
 
-## Feature Storage in Hopsworks
+3. **Enhanced Predictions**  
+   The rolling window feature, combined with weather data, provides accurate predictions for future PM2.5 levels.  
 
-The newly created rolling window feature is stored as a new feature in Hopsworks to ensure it is accessible for future predictions and training processes.
+---
 
-## Daily Feature Update
+## ✨ Model Performance  
 
-A dedicated notebook (`2_air_quality_feature_pipeline.ipynb`) is used to update the rolling window features daily. For each day, the rolling window mean is recalculated using the current PM2.5 value and stored in the feature store.
+### Without Rolling Window Features  
 
-## Model Retraining
+- **MSE**: 34.85334  
+- **R-Squared**: 0.01622  
 
-The predictive model was retrained with the updated dataset, which now includes the rolling window feature (`pm25_3day_roll_mean`). This additional feature has improved the model's capability to learn trends and dependencies in the data.
+![Prediction Results](Standard_Results.jpg)  
 
-## Inference Pipeline
+### With Rolling Window Features  
 
-### Daily Prediction Loop
+- **MSE**: 6.9079943  
+- **R-Squared**: 0.61780  
 
-A loop was implemented to perform inference day by day. For each future day, the model predicts the PM2.5 value based on the available data and updates the rolling window feature for subsequent predictions. This ensures that the rolling window feature reflects real-time predictions and weather conditions for accurate forecasting.
+![Prediction Results](RollingWindow_Results.jpg)  
 
-### Single-Day PM2.5 Prediction
+---
 
-For every day in the inference process, the model predicts the PM2.5 value of the next single day. This step leverages both weather forecast data and the predicted rolling window feature.
+## ✨ Additional Resources  
 
-### Updated Inference with New Features
+- **Without Rolling Window Features:**  
+   Predictions and pipeline details for the version without rolling window features can be accessed [here](https://jacopodallafior.github.io/Air_quality/air-quality/).  
 
-The model was used to make predictions of PM2.5 values by incorporating both the rolling window feature and other estimated features.
+- **With Rolling Window Features:**  
+   Explore the enhanced rolling window feature pipeline [here](https://jacopodallafior.github.io/Air_Quality_Rolling_Window/air-quality/).  
 
-## Results Display
+---
 
-The results of the inference, including predictions made with the updated rolling window feature, are displayed at the following link:  
-[Air Quality Rolling Window Predictions](https://jacopodallafior.github.io/Air_Quality_Rolling_Window/air-quality/)
+## 🛠 How to Contribute  
 
-## Key Files and Notebooks
+We welcome contributions to improve this project:  
+1. Fork the repository.  
+2. Create a feature branch for your changes.  
+3. Submit a pull request.  
 
-- **`2_air_quality_feature_pipeline.ipynb`**: Updates rolling window features and stores them in Hopsworks.
-- **`model_training.ipynb`**: Retrains the model with the new features.
-- **`inference_pipeline.ipynb`**: Implements the day-by-day prediction loop for PM2.5 values.
+Ideas for contribution:  
+- Add support for more weather variables.  
+- Enhance the dashboard UI.  
+- Optimize prediction models.  
+
+---
+
+## 🤝 Acknowledgments  
+
+This project was inspired by the book *Building Machine Learning Systems with a Feature Store: Batch, Real-Time, and LLMs* by O'Reilly. Special thanks to the [Hopsworks](https://www.hopsworks.ai/) team for their exceptional feature store platform.  
+
+---
+
+For questions or feedback, feel free to [open an issue](https://github.com/Grandediw/air-quality-prediction/issues).  
+
+--- 
