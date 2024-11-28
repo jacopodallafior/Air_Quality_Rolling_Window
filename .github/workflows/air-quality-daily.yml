@@ -27,6 +27,7 @@ jobs:
           cd version2
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install jupyter
 
       - name: execute python workflows from bash script
         env:
